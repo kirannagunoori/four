@@ -1,0 +1,32 @@
+{% load staticfiles %}
+{% include 'common.html' %}
+<html>
+<style type="text/css">
+    a:link{
+        text-decoration:none;
+    }
+</style>
+<body background="">
+<br>
+<br>
+<br>
+<table align="center" border="2" width="1000">
+    <tr bgcolor="black"  >
+        <th><h3><a href="{% url 'viewvacantplot' %}" style="color:yellow">View Vacant Plots</a></h3></th>
+        <th><h3><a href="{% url 'viewvacantapartments' %}" style="color:yellow">View Vacant Apartments</a></h3></th>
+        <th><h3><a href="{% url 'dvpreports' %}" style="color:yellow">Download Vacant Plots Reports</a></h3></th>
+        <th><h3><a href="{% url 'dvareports' %}" style="color:yellow">Download Vacant Apartment Reports</a></h3></th>
+        <th><h3><form action="{% url 'logout1' %}" method="post">
+            {% csrf_token %}<button type="submit">Logout</button></form></h3></th>
+    </tr>
+</table>
+<br>
+<br>
+
+{% if data %}
+    <center><h1 style="color: red">{{ data }}</h1></center>
+{% endif %}
+<br>
+<br>
+</body>
+</html>

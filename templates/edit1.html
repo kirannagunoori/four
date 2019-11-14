@@ -1,0 +1,112 @@
+{% load staticfiles %}
+{% include 'common.html' %}
+<html>
+<style type="text/css">
+    a:link{
+        text-decoration:none;
+    }
+</style>
+<body background="{% static 'images/background.jpg' %}">
+<br>
+<br>
+<br>
+{% if total_cost %}
+<table align="center" border="2" width="500">
+    <tr>
+        <th style="color:yellow" colspan="2"><h3>Edit Plot</h3></th>
+    </tr>
+    <form action="{% url 'plotsave' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+      <tr>
+        <th style="color:yellow" colspan="2"><h3>Plot number:<input type="number" value="{{ pn }}" name="pn" required readonly ></h3></th>
+    </tr>
+          <tr>
+        <th style="color:yellow" colspan="2"><h3>Road number:<input type="number" value="{{ rn }}" name="rn" required  readonly></h3></th>
+    </tr>
+          <tr>
+        <th style="color:yellow" colspan="2"><h3>Survey Number<input type="number" value="{{ sn }}" name="sn" required  readonly></h3></th>
+    </tr>
+    <tr>
+        <th style="color:yellow" colspan="2"><h3>Square yards:<input type="number" value="{{ sy }}" name="sy" required readonly></h3></th>
+    </tr>
+             <tr>
+        <th style="color:yellow" colspan="2"><h3>cost per square yard<input type="number" value="{{ csy }}" name="csy" required readonly></h3></th>
+    </tr>
+             <tr>
+        <th style="color:yellow" colspan="2">other expences<h3><input type="number" value="{{ oe }}" name="oe" required readonly></h3></th>
+    </tr>
+             <tr>
+                 <th style="color:yellow" colspan="2"><h3>Facing:<input type="text" name="facing" value="{{ facing }}" required readonly></h3></th>
+    </tr>
+              <tr>
+                 <th style="color:yellow" colspan="2"><h3>status:<input type="text" name="status" value="{{ status }}" required readonly></h3></th>
+    </tr>
+                      <tr>
+                 <th style="color:yellow" colspan="2"><h3>Total_cost:<input type="number" name="cost" value="{{ total_cost }}"  required readonly></h3></th>
+    </tr>
+        <tr>
+                 <th style="color:yellow" colspan="2"><h3>Plot_image:<input type="file" name="image"  required ></h3></th>
+    </tr>
+    <tr>
+        <th colspan="2"><button type="submit">save</button></th>
+    </tr>
+    </form>
+    <tr><th ><a href="{% url 'back' %}" style="color:yellow">Back<img src="{% static 'images/back.png' %}" width="50" height="50"></a></th>
+     <th><h3><form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}<button type="submit">Logout</button></form></h3></th></tr>
+</table>
+{% else %}
+<table align="center" border="2" width="500">
+{% for x in data1 %}
+    <tr>
+        <th style="color:yellow" colspan="2"><h3>Edit Plot </h3></th>
+    </tr>
+    <form action="{% url 'cost' %}" method="post">
+        {% csrf_token %}
+      <tr>
+        <th style="color:yellow" colspan="2"><h3><input type="number" value="{{ x.Plot_number }}" name="pn" required readonly></h3></th>
+    </tr>
+          <tr>
+        <th style="color:yellow" colspan="2"><h3><input type="number" value="{{ x.Road_number }}" name="rn" required readonly ></h3></th>
+    </tr>
+          <tr>
+        <th style="color:yellow" colspan="2"><h3><input type="number" value="{{ x.Survey_number }}" name="sn" required readonly></h3></th>
+    </tr>
+    <tr>
+        <th style="color:yellow" colspan="2"><h3><input type="number" value="{{ x.Square_yards }}" name="sy" required readonly></h3></th>
+    </tr>
+             <tr>
+        <th style="color:yellow" colspan="2"><h3><input type="number" value="{{ x.Cost_per_saqare_yard }}" name="csy" required ></h3></th>
+    </tr>
+             <tr>
+        <th style="color:yellow" colspan="2"><h3><input type="number" value="{{ x.Other_expences }}" name="oe" required  ></h3></th>
+    </tr>
+             <tr>
+        <th style="color:yellow" colspan="2"><h3>Facing:<input type="text" name="facing" value="{{ x.Facing }}" readonly>
+        </h3></th>
+    </tr>
+              <tr>
+        <th style="color:yellow" colspan="2"><h3>Status:<select name="status" >
+            <option>Vacant</option>
+            <option>Reserved</option>
+            <option>sold</option>
+        </select> {{ x.Status }}</h3></th>
+
+    </tr>
+    <tr>
+        <th colspan="2"><button type="submit">Total Cost</button></th>
+    </tr>
+        {% endfor %}
+    </form>
+    <tr><th ><a href="{% url 'back' %}" style="color:yellow">Back<img src="{% static 'images/back.png' %}" width="50" height="50"></a></th>
+     <th><h3><form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}<button type="submit">Logout</button></form></h3></th></tr>
+</table>
+{% endif %}
+<center>
+    {% for x in messages %}
+    <h1 style="color: red">{{ x }}</h1>
+    {% endfor %}
+</center>
+</body>
+</html>

@@ -1,0 +1,72 @@
+{% load staticfiles %}
+{% include 'common.html' %}
+<html>
+<style type="text/css">
+    a:link{
+        text-decoration:none;
+    }
+</style>
+<body background="{% static 'images/background.jpg' %}">
+<br>
+<br>
+<br>
+
+<table align="center" border="2" width="500">
+    <tr>
+        <th style="color:yellow" colspan="2"><h3>Edit Apartment</h3></th>
+    </tr>
+    {% for x in data1 %}
+    <form action="{% url 'flatsave' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+      <tr>
+        <th style="color:yellow" colspan="2"><h3>Flat_number:<input type="number" value="{{ x.Flat_number }}" name="fn" required readonly></h3></th>
+    </tr>
+           <tr>
+        <th style="color:yellow" colspan="2"><h3>Place:<input type="text" value="{{ x.Place }}" name="fp" required readonly></h3></th>
+    </tr>
+          <tr>
+        <th style="color:yellow" colspan="2"><h3>Road_number:<input type="number" value="{{ x.Road_number }}" name="rn" required readonly></h3></th>
+    </tr>
+          <tr>
+        <th style="color:yellow" colspan="2"><h3>House_number:<input type="number" value="{{ x.House_number }}" name="hn" required readonly></h3></th>
+    </tr>
+    <tr>
+        <th style="color:yellow" colspan="2"><h3>Square_yards:<input type="number" value="{{ x.Square_yards }}" name="sy" required readonly></h3></th>
+    </tr>
+             <tr>
+        <th style="color:yellow" colspan="2"><h3>Cost :<input type="number" value="{{ x.Cost }}" name="cost" required ></h3></th>
+    </tr>
+             <tr>
+        <th style="color:yellow" colspan="2"><h3>Facing:<select name="facing" >
+            <option>North</option>
+            <option>South</option>
+            <option>East</option>
+            <option>West</option>
+        </select> {{ x.Facing }}</h3></th>
+    </tr>
+              <tr>
+        <th style="color:yellow" colspan="2"><h3>Status:<select name="status" >
+            <option>Vacant</option>
+            <option>Reserved</option>
+            <option>sold</option>
+        </select> {{ x.Status }}</h3></th>
+    </tr>
+        <tr>
+        <th style="color:yellow" colspan="2"><h3><input type="file"  name="image" required ></h3></th>
+    </tr>
+    <tr>
+        <th colspan="2"><button type="submit">Save</button></th>
+    </tr>
+    </form>
+    {% endfor %}
+    <tr><th ><a href="{% url 'back' %}" style="color:yellow">Back<img src="{% static 'images/back.png' %}" width="50" height="50"></a></th>
+     <th><h3><form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}<button type="submit">Logout</button></form></h3></th></tr>
+</table>
+<center>
+    {% for x in messages %}
+        <h2 style="color: red">{{ x }}</h2>
+    {% endfor %}
+</center>
+</body>
+</html>

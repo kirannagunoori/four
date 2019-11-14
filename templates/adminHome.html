@@ -1,0 +1,41 @@
+{% load staticfiles %}
+{% include 'common.html' %}
+<html>
+<style type="text/css">
+    a:link{
+        text-decoration:none;
+    }
+</style>
+<body background="">
+<br>
+<table align="center" border="2" width="1000">
+    <tr bgcolor="black"  >
+        <th><h3><a href="{% url 'Home' %}" style="color:yellow">Home</a></h3></th>
+        <th><h3><a href="{% url 'plot' %}" style="color:yellow">Plots</a></h3></th>
+        <th><h3><a href="{% url 'apart' %}" style="color:yellow">Apartments</a></h3></th>
+        <th><h3><a href="{% url 'sales' %}" style="color:yellow">Sales</a></h3></th>
+        <th><h3><a href="{% url 'emp' %}" style="color:yellow">Employees</a></h3></th>
+        <th><h3><a href="{% url 'reports' %}" style="color:yellow">Reports</a></h3></th>
+        <th><h3><a href="{% url 'about' %}" style="color:yellow">About</a></h3></th>
+        <th><h3><form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}<button type="submit">Logout</button></form></h3></th>
+    </tr>
+</table>
+<br>
+<br>
+<br>
+<br>
+{% if data %}
+    <center><h1 style="color: red">{{ data }}</h1></center>
+{% endif %}
+<br>
+<br>
+<table align="center" border="2" width="1000">
+    <tr bgcolor="black"  >
+        <th><h3><a href="{% url 'changepass' %}" style="color:yellow">Change password</a></h3></th>
+        <th><h3><a href="{% url 'addUser' %}" style="color:yellow">Add User</a></h3></th>
+        <th><h3><a href="{% url 'viewuser' %}" style="color:yellow">View User</a></h3></th>
+    </tr>
+</table>
+</body>
+</html>

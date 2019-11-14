@@ -1,0 +1,25 @@
+{% load staticfiles %}
+{% include 'common.html' %}
+<html>
+<style type="text/css">
+    a:link{
+        text-decoration:none;
+    }
+</style>
+<body background="">
+<br>
+<br>
+<br>
+<table align="center" border="2" width="500">
+    <tr>
+        <th style="color:yellow" colspan="2"><a href="{% url 'newapart' %}" style="color: yellow"><h1>New Apartment</h1></a></th>
+    </tr>
+        <tr>
+            <th style="color:yellow" colspan="2"><a href="{% url 'viewapart' %}" style="color: yellow"><h1>View Apartment</h1></a></th>
+    </tr>
+    <tr><th ><a href="{% url 'back' %}" style="color:yellow">Back<img src="{% static 'images/back.png' %}" width="50" height="50"></a></th>
+     <th><h3><form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}<button type="submit">Logout</button></form></h3></th></tr>
+</table>
+</body>
+</html>

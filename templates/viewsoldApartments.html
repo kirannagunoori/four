@@ -1,0 +1,52 @@
+{% load staticfiles %}
+{% include 'common.html' %}
+<html>
+<style type="text/css">
+    a:link{
+        text-decoration:none;
+    }
+</style>
+<body background="{% static 'images/background.jpg' %}">
+<br>
+<br>
+{% if data %}
+    <table align="center" border="2" >
+    <tr style="color:yellow">
+        <th><h3>Flat_number</h3></th>
+        <th><h3>Flat_place</h3></th>
+        <th><h3>Road_number</h3></th>
+        <th><h3>House_number</h3></th>
+        <th><h3>Square_yards</h3></th>
+        <th width="100"><h3>Facing</h3></th>
+        <th width="100"><h3>Status</h3></th>
+        <th><h3>Cost</h3></th>
+        <th><h3>flat_image</h3></th>
+        <th><h3>Edit_flat</h3></th>
+        <th><h3>delete_flat</h3></th>
+    </tr>
+    {% for x in data %}
+    <tr style="color: red">
+        <th><h3>{{ x.Flat_number }}</h3></th>
+        <th><h3>{{ x.Place}}</h3></th>
+        <th><h3>{{ x.Road_number }}</h3></th>
+         <th><h3>{{ x.House_number }}</h3></th>
+        <th><h3>{{ x.Square_yards }}</h3></th>
+        <th><h3>{{ x.Facing }}</h3></th>
+        <th><h3>{{ x.Status }}</h3></th>
+        <th><h3>{{ x.Cost }}</h3></th>
+        <th><a href="{{ x.Flat_image.url }}"><img src="{{ x.Flat_image.url }}" height="40" width="100"></a></th>
+        <th><a href="{% url 'editflat' %}?id={{ x.House_number }}" style="color: red"><h3>Edit</h3></a></th>
+        <th><a href="{% url 'deleteflat' %}?id={{ x.House_number }}" style="color: red"><h3>Yes</h3></a></th>
+    </tr>
+        {% endfor %}
+    </table>>
+    {% else %}
+    <center><h2 style="color: red">No data to see</h2></center>
+
+{% endif %}
+     <table align="center" border="2" width="600">
+        <tr><th colspan="6"><a href="{% url 'back' %}" style="color:yellow">Back<img src="{% static 'images/back.png' %}" width="50" height="50"></a></th>
+     <th colspan="5"><h3><form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}<button type="submit">Logout</button></form></h3></th></tr>
+    </table>
+</body>

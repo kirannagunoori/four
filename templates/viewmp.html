@@ -1,0 +1,40 @@
+{% load staticfiles %}
+{% include 'common.html' %}
+<html>
+<style type="text/css">
+    a:link{
+        text-decoration:none;
+    }
+</style>
+<body background="{% static 'images/background.jpg' %}">
+<br>
+<br>
+{% if data %}
+    <table align="center" border="2" >
+    <tr style="color:yellow">
+        <th><h3>Employee-Id</h3></th>
+        <th><h3>Employee-Name</h3></th>
+        <th><h3>Employee-Designation</h3></th>
+        <th><h3>Employee-mail</h3></th>
+        <th colspan="2"><h3>Delete Employee</h3></th>
+    </tr>
+    {% for x in data %}
+    <tr style="color: red">
+        <th><h3>{{ x.id}}</h3></th>
+        <th><h3>{{ x.Name}}</h3></th>
+        <th><h3>{{ x.Designation }}</h3></th>
+         <th><h3>{{ x.Employee_mail }}</h3></th>
+        <th><a href="{% url 'deleteemp' %}?id={{ x.id }}" style="color: red"><h3>Yes</h3></a></th>
+    </tr>
+        {% endfor %}
+    </table>>
+    {% else %}
+    <center><h2 style="color: red">No data to see</h2></center>
+
+{% endif %}
+     <table align="center" border="2" width="600">
+        <tr><th colspan="6"><a href="{% url 'back' %}" style="color:yellow">Back<img src="{% static 'images/back.png' %}" width="50" height="50"></a></th>
+     <th colspan="5"><h3><form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}<button type="submit">Logout</button></form></h3></th></tr>
+    </table>
+</body>

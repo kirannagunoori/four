@@ -1,0 +1,70 @@
+{% load staticfiles %}
+{% include 'common.html' %}
+<html>
+<style type="text/css">
+    a:link{
+        text-decoration:none;
+    }
+</style>
+<body background="{% static 'images/background.jpg' %}">
+<br>
+<br>
+<br>
+
+<table align="center" border="2" width="500">
+    <tr>
+        <th style="color:yellow" colspan="2"><h3>New Apartment Registration</h3></th>
+    </tr>
+    <form action="{% url 'flatsave' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+      <tr>
+        <th style="color:yellow" colspan="2"><h3><input type="number" placeholder="Flat Number" name="fn" required ></h3></th>
+    </tr>
+           <tr>
+        <th style="color:yellow" colspan="2"><h3><input type="text" placeholder="Flat place" name="fp" required ></h3></th>
+    </tr>
+          <tr>
+        <th style="color:yellow" colspan="2"><h3><input type="number" placeholder="Road Number" name="rn" required ></h3></th>
+    </tr>
+          <tr>
+        <th style="color:yellow" colspan="2"><h3><input type="number" placeholder="House Number" name="hn" required ></h3></th>
+    </tr>
+    <tr>
+        <th style="color:yellow" colspan="2"><h3><input type="number" placeholder="Square Yard" name="sy" required ></h3></th>
+    </tr>
+             <tr>
+        <th style="color:yellow" colspan="2"><h3><input type="number" placeholder="Cost" name="cost" required ></h3></th>
+    </tr>
+             <tr>
+        <th style="color:yellow" colspan="2"><h3>Facing:<select name="facing" >
+            <option>North</option>
+            <option>South</option>
+            <option>East</option>
+            <option>West</option>
+        </select> </h3></th>
+    </tr>
+              <tr>
+        <th style="color:yellow" colspan="2"><h3>Status:<select name="status" >
+            <option>Vacant</option>
+            <option>Reserved</option>
+            <option>sold</option>
+        </select> </h3></th>
+    </tr>
+        <tr>
+        <th style="color:yellow" colspan="2"><h3><input type="file"  name="image" required ></h3></th>
+    </tr>
+    <tr>
+        <th colspan="2"><button type="submit">Save</button></th>
+    </tr>
+    </form>
+    <tr><th ><a href="{% url 'back' %}" style="color:yellow">Back<img src="{% static 'images/back.png' %}" width="50" height="50"></a></th>
+     <th><h3><form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}<button type="submit">Logout</button></form></h3></th></tr>
+</table>
+<center>
+    {% for x in messages %}
+        <h2 style="color: red">{{ x }}</h2>
+    {% endfor %}
+</center>
+</body>
+</html>

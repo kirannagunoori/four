@@ -1,0 +1,47 @@
+{% load staticfiles %}
+{% include 'common.html' %}
+<html>
+<style type="text/css">
+    a:link{
+        text-decoration:none;
+    }
+</style>
+<body background="{% static 'images/background.jpg' %}">
+<br>
+<br>
+{% if data %}
+    <table align="center" border="2" >
+    <tr style="color:yellow">
+        <th><h3>Plot_number</h3></th>
+        <th><h3>Road_number</h3></th>
+        <th><h3>Survey_number</h3></th>
+        <th><h3>Square_yards</h3></th>
+        <th><h3>CostPerSquare_yard</h3></th>
+        <th><h3>Other_expences</h3></th>
+        <th width="100"><h3>Facing</h3></th>
+        <th width="100"><h3>Status</h3></th>
+        <th><h3>Total_cost</h3></th>
+        <th><h3>Plot_image</h3></th>
+    </tr>
+    {% for x in data %}
+    <tr style="color: red">
+        <th><h3>{{ x.Plot_number }}</h3></th>
+        <th><h3>{{ x.Road_number }}</h3></th>
+        <th><h3>{{ x.Survey_number }}</h3></th>
+        <th><h3>{{ x.Square_yards }}</h3></th>
+        <th><h3>
+            {{x.Cost_per_saqare_yard}}
+    </h3></th>
+        <th><h3>{{ x.Other_expences }}</h3></th>
+        <th><h3>{{ x.Facing }}</h3></th>
+        <th><h3>{{ x.Status }}</h3></th>
+        <th><h3>{{ x.Total_cost }}</h3></th>
+        <th><a href="{{ x.Plot_image.url }}"><img src="{{ x.Plot_image.url }}" height="40" width="100"></a></th>
+    </tr>
+    {% endfor %}
+    </table>
+    {% else %}
+    <center><h2 style="color: red">No data to see</h2></center>
+
+{% endif %}
+</body>
